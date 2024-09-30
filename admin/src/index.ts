@@ -5,6 +5,7 @@ import {TreeIcon} from "./components/TreeIcon";
 import { PluginIcon } from './components/PluginIcon';
 import { reducers } from './store/reducers';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
+import { fieldSchema } from '../../shared/constants';
 
 export default {
   register(app: any) {
@@ -52,94 +53,7 @@ export default {
             },
             name: 'options.schemas',
             type: 'json',
-            defaultValue: "{\n" +
-              "  \"attributes\": [\n" +
-              "    {\n" +
-              "      \"id\": \"title\",\n" +
-              "      \"label\": \"Title\",\n" +
-              "      \"placeholder\": \"Enter item title\",\n" +
-              "      \"type\": \"text\",\n" +
-              "      \"validationType\": \"string\",\n" +
-              "      \"value\": \"Title\",\n" +
-              "      \"validations\": [\n" +
-              "        {\n" +
-              "          \"type\": \"required\",\n" +
-              "          \"params\": [\n" +
-              "            \"this field is required\"\n" +
-              "          ]\n" +
-              "        },\n" +
-              "        {\n" +
-              "          \"type\": \"max\",\n" +
-              "          \"params\": [\n" +
-              "            100,\n" +
-              "            \"Title cannot be more than 100 characters\"\n" +
-              "          ]\n" +
-              "        }\n" +
-              "      ]\n" +
-              "    },\n" +
-              "    {\n" +
-              "      \"id\": \"url\",\n" +
-              "      \"label\": \"Url\",\n" +
-              "      \"placeholder\": \"Enter url\",\n" +
-              "      \"type\": \"text\",\n" +
-              "      \"validationType\": \"string\",\n" +
-              "      \"value\": \"Url\",\n" +
-              "      \"validations\": [\n" +
-              "        {\n" +
-              "          \"type\": \"required\",\n" +
-              "          \"params\": [\n" +
-              "            \"this field is required\"\n" +
-              "          ]\n" +
-              "        },\n" +
-              "        {\n" +
-              "          \"type\": \"max\",\n" +
-              "          \"params\": [\n" +
-              "            200,\n" +
-              "            \"Url cannot be more than 200 characters\"\n" +
-              "          ]\n" +
-              "        }\n" +
-              "      ]\n" +
-              "    },\n" +
-              "    {\n" +
-              "      \"id\": \"target\",\n" +
-              "      \"label\": \"Target\",\n" +
-              "      \"placeholder\": \"Enter target\",\n" +
-              "      \"type\": \"text\",\n" +
-              "      \"validationType\": \"mixed\",\n" +
-              "      \"value\": \"Target\",\n" +
-              "      \"validations\": [\n" +
-              "        {\n" +
-              "          \"type\": \"oneOf\",\n" +
-              "          \"params\": [\n" +
-              "            [\n" +
-              "              \"_blank\",\n" +
-              "              \"_parent\",\n" +
-              "              \"_self\",\n" +
-              "              \"_top\"\n" +
-              "            ],\n" +
-              "            \"this field needs to be one of the following: _blank, _parent, _self, _top\"\n" +
-              "          ]\n" +
-              "        }\n" +
-              "      ]\n" +
-              "    },\n" +
-              "    {\n" +
-              "      \"id\": \"isProtected\",\n" +
-              "      \"label\": \"isProtected\",\n" +
-              "      \"placeholder\": \"Choose isProtected\",\n" +
-              "      \"type\": \"boolean\",\n" +
-              "      \"validationType\": \"boolean\",\n" +
-              "      \"value\": \"isProtected\",\n" +
-              "      \"validations\": [\n" +
-              "        {\n" +
-              "          \"type\": \"required\",\n" +
-              "          \"params\": [\n" +
-              "            \"Need to choose isProtected\"\n" +
-              "          ]\n" +
-              "        }\n" +
-              "      ]\n" +
-              "    }\n" +
-              "  ]\n" +
-              "}",
+            defaultValue: JSON.stringify(fieldSchema,null, 2),
             description: {
               id: getTranslation('tree-menus.options.advanced.fields.description'),
               defaultMessage: 'Schema of the tree',

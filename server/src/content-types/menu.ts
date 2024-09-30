@@ -1,3 +1,5 @@
+import { fieldSchema } from '../../../shared/constants';
+
 export default {
   kind: 'collectionType',
   collectionName: 'menus',
@@ -48,7 +50,7 @@ export default {
       },
       type: 'customField',
       options: {
-        schemas: '',
+        schemas: JSON.stringify(fieldSchema,null, 2),
       },
       required: true,
       customField: 'plugin::tree-menus.tree',
