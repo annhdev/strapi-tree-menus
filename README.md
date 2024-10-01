@@ -341,6 +341,7 @@ If you are enjoying this plugin and feel extra appreciative, you can [buy me a b
 <Image src="public/bmc_qr.png" width="200px" alt="Buy me a beer"/>
 
 ## <a id="roadmap"></a>🚧 Roadmap
+* [x] Add support RBAC for menus.
 
 ## <a id="gallery"></a>📸 Gallery
 <Image src="public/screenshot_1.png" alt="Screenshot for Strapi menus plugin" />
