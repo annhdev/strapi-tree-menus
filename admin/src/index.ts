@@ -6,6 +6,7 @@ import { PluginIcon } from './components/PluginIcon';
 import { reducers } from './store/reducers';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 import { fieldSchema } from '../../shared/constants';
+import { PERMISSIONS } from './permissions';
 
 export default {
   register(app: any) {
@@ -21,6 +22,7 @@ export default {
 
         return App;
       },
+      permissions: PERMISSIONS.main,
     });
 
     app.addReducers(reducers);
