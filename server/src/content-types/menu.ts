@@ -26,6 +26,11 @@ export default {
   },
   attributes: {
     title: {
+      pluginOptions: {
+        i18n: {
+          localized: false,
+        },
+      },
       type: 'string',
       required: true,
       maxLength: 100,
