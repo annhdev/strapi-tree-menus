@@ -1,5 +1,5 @@
 <div align="center">
-  <img style="width: 160px; height: auto;" src="public/table-tree.svg" alt="Logo for Strapi menus plugin" />
+  <img style="width: 160px; height: auto;" src="public/tree-menus-logo.png" alt="Logo for Strapi menus plugin" />
   <h1>Strapi Menus</h1>
   <p>A plugin for Strapi CMS to customize the structure of menus and menu items.</p>
   <img style="width: 960px; height: auto;" src="public/screenshot_2.png" alt="Screenshot for Strapi menus plugin" />
