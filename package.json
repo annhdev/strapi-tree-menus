@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/annhdev/tree-menus-field.git"
+    "url": "git+ssh://git@github.com:annhdev/strapi-tree-menus.git"
   },
   "license": "MIT",
   "author": "AnnhDev <anh.dev@gmail.com>",
