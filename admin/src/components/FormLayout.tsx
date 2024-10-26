@@ -58,11 +58,11 @@ const FormLayout = ({ ...props }: FormLayoutProps) => {
     }
   }
 
-  useEffect(() => {
-    if (activeItem) {
-      console.log(activeItem['title' as keyof typeof activeItem])
-    }
-  }, [activeItem])
+  // useEffect(() => {
+  //   if (activeItem) {
+  //     console.log(activeItem['title' as keyof typeof activeItem])
+  //   }
+  // }, [activeItem])
 
   return (
     <>

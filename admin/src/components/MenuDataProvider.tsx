@@ -72,8 +72,6 @@ const MenuDataProvider = ({ children, value, onChange, name, schema, disabled, e
 
   const flattenedItems = useMemo(() => {
     const flattenedTree = flattenTree(items)
-    console.log(items)
-    console.log(flattenedTree)
 
     const collapsedItems = flattenedTree.reduce<UniqueIdentifier[]>(
       (acc, { children, collapsed, errors, id }) => (collapsed && children.length ? [...acc, errors, id] : acc),
@@ -89,7 +87,8 @@ const MenuDataProvider = ({ children, value, onChange, name, schema, disabled, e
     async (items: TreeItems) => {
       try {
         await validateSchema.validate(items, { abortEarly: false })
-        console.log('validated success', items)
+        // console.log('validated success', items)
+        console.log('validated success')
         // reset errors, remove all errors from items
         resetErrors(items)
         setErrors(undefined)
