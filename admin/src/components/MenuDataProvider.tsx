@@ -5,7 +5,7 @@ import { ValidationError } from 'yup'
 
 import { FieldSchema } from '../../../shared/contracts/schema'
 import { addErrorsToFields, createYupSchema, resetErrors, sanitizeItems } from '../../../shared/utils/validation'
-import { FlattenedItem,TreeItems } from '../types'
+import { FlattenedItem, TreeItems } from '../types'
 import { flattenTree, removeChildrenOf } from './SortableTree/utilities'
 
 interface MenuDataProviderProps {
@@ -79,7 +79,7 @@ const MenuDataProvider = ({ children, value, onChange, name, schema, disabled, e
     )
 
     return removeChildrenOf(flattenedTree, activeId ? [activeId, ...collapsedItems] : collapsedItems)
-  }, [activeId, items])
+  }, [items])
 
   const validateSchema = useMemo(() => createYupSchema(schema.attributes), [schema.attributes])
 
@@ -110,7 +110,7 @@ const MenuDataProvider = ({ children, value, onChange, name, schema, disabled, e
   )
 
   const handleOnChange = (items: TreeItems) => {
-    let sanitizedItems = sanitizeItems(items)
+    const sanitizedItems = sanitizeItems(items)
     onChange(name, sanitizedItems)
   }
 

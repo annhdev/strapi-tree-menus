@@ -1,37 +1,37 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
 import {
   Announcements,
-  DndContext,
   closestCenter,
+  defaultDropAnimation,
+  DndContext,
+  DragEndEvent,
+  DragMoveEvent,
+  DragOverEvent,
+  DragOverlay,
+  DragStartEvent,
+  DropAnimation,
   KeyboardSensor,
+  MeasuringStrategy,
+  Modifier,
   PointerSensor,
+  UniqueIdentifier,
   useSensor,
   useSensors,
-  DragStartEvent,
-  DragOverlay,
-  DragMoveEvent,
-  DragEndEvent,
-  DragOverEvent,
-  MeasuringStrategy,
-  DropAnimation,
-  Modifier,
-  defaultDropAnimation,
-  UniqueIdentifier,
 } from '@dnd-kit/core'
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-
-import { buildTree, flattenTree, getProjection, getChildCount, removeItem, setProperty } from './utilities'
-import type { FlattenedItem, SensorContext, TreeItems } from '../../types'
-import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates'
-import { SortableTreeItem } from './components'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Button } from '@strapi/design-system'
 import { Plus } from '@strapi/icons'
-import { useIntl } from 'react-intl'
-import useTreeData from '../../hooks/useTreeData'
 import { cloneDeep } from 'lodash'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { useIntl } from 'react-intl'
 import { ValidationError } from 'yup'
+
+import useTreeData from '../../hooks/useTreeData'
+import type { FlattenedItem, SensorContext, TreeItems } from '../../types'
+import { SortableTreeItem } from './components'
+import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates'
+import { buildTree, flattenTree, getChildCount, getProjection, removeItem, setProperty } from './utilities'
 
 const measuring = {
   droppable: {
@@ -240,11 +240,12 @@ export function SortableTree({ collapsible, indicator = false, indentationWidth 
   }
 
   function handleCollapse(id: UniqueIdentifier) {
-    let newItems = setProperty(cloneDeep(items), id, 'collapsed', (value) => {
+    const newItems = setProperty(cloneDeep(items), id, 'collapsed', (value) => {
       return !value
     })
+
     setItems(newItems)
-    onChange(newItems)
+    // onChange(newItems)
   }
 
   function getMovementAnnouncement(eventName: string, activeId: UniqueIdentifier, overId?: UniqueIdentifier) {
@@ -299,7 +300,7 @@ export function SortableTree({ collapsible, indicator = false, indentationWidth 
   async function handleAddItem(parentId: UniqueIdentifier | null = null) {
     let _items: TreeItems = cloneDeep(items)
     if (!parentId) {
-      let newItem = {
+      const newItem = {
         id: `${_items.length + 1}`,
         title: `New ${_items.length + 1}`,
         url: '/',
@@ -309,7 +310,7 @@ export function SortableTree({ collapsible, indicator = false, indentationWidth 
       }
       _items.push(newItem)
     } else {
-      let parentItem = flattenedItems.find((item) => item.id === parentId)
+      const parentItem = flattenedItems.find((item) => item.id === parentId)
       if (parentItem) {
         const clonedItems: FlattenedItem[] = JSON.parse(JSON.stringify(flattenTree(_items)))
 
@@ -328,7 +329,7 @@ export function SortableTree({ collapsible, indicator = false, indentationWidth 
       }
     }
 
-    let result = await validate(_items)
+    const result = await validate(_items)
     setItems(result.data)
 
     if (!result.errors) {
@@ -339,7 +340,7 @@ export function SortableTree({ collapsible, indicator = false, indentationWidth 
   }
 
   function handleEditItem(id: UniqueIdentifier) {
-    let activeItem = flattenedItems.find(({ id: _id }) => _id === id)
+    const activeItem = flattenedItems.find(({ id: _id }) => _id === id)
     setActiveItem(activeItem)
   }
 }

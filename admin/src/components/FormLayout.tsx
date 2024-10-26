@@ -1,21 +1,21 @@
-import { Box, Grid, Typography, Card } from '@strapi/design-system'
+import { Box, Card, Grid, Typography } from '@strapi/design-system'
+import { Divider } from '@strapi/design-system'
+import { useEffect } from 'react'
+import { useIntl } from 'react-intl'
+import styled from 'styled-components'
+import { ValidationError } from 'yup'
 
 import useTreeData from '../hooks/useTreeData'
-import { useIntl } from 'react-intl'
-import { GenericInput } from './GenericInputs'
-import { getTranslation } from '../utils/getTranslation'
-import { useEffect } from 'react'
-import { Divider } from '@strapi/design-system'
-import styled from 'styled-components'
 import type { FlattenedItem } from '../types'
+import { getTranslation } from '../utils/getTranslation'
+import { GenericInput } from './GenericInputs'
 import { buildTree } from './SortableTree/utilities'
-import { ValidationError } from 'yup'
 
 const DividerFull = styled(Divider)`
   flex: 1;
 `
 
-interface FormLayoutProps {}
+type FormLayoutProps = object
 
 const FormLayout = ({ ...props }: FormLayoutProps) => {
   const { formatMessage } = useIntl()
@@ -36,19 +36,18 @@ const FormLayout = ({ ...props }: FormLayoutProps) => {
 
   const handleChange = async (field: string, fieldValue: any) => {
     if (activeItem) {
-      // @ts-ignore
-      setActiveItem((item) => ({ ...item, [field]: fieldValue }))
+      setActiveItem((item) => (item ? { ...item, [field]: fieldValue } : undefined))
 
-      let newFlattenedItems = flattenedItems.map((item) => {
+      const newFlattenedItems = flattenedItems.map((item) => {
         if (item.id === activeItem.id) {
           item[field as keyof FlattenedItem] = fieldValue
         }
         return item
       })
 
-      let newItems = buildTree(newFlattenedItems)
+      const newItems = buildTree(newFlattenedItems)
 
-      let result = await validate(newItems)
+      const result = await validate(newItems)
 
       setItems(result.data)
       if (!result.errors) {

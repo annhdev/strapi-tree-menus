@@ -151,7 +151,7 @@ export function setProperty<T extends keyof TreeItem>(
   property: T,
   setter: (value: TreeItem[T]) => TreeItem[T]
 ) {
-  for (let item of items) {
+  for (const item of items) {
     if (item.id === id) {
       item[property] = setter(item[property])
       continue
