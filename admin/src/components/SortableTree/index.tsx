@@ -245,7 +245,7 @@ export function SortableTree({ collapsible, indicator = false, indentationWidth 
     })
 
     setItems(newItems)
-    // onChange(newItems)
+    onChange(newItems)
   }
 
   function getMovementAnnouncement(eventName: string, activeId: UniqueIdentifier, overId?: UniqueIdentifier) {

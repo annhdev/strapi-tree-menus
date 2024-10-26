@@ -56,7 +56,7 @@ export const sanitizeItems = (items: TreeItems): TreeItems => {
   return traverse(items).map(function (value) {
     if (
       this.key === 'errors' ||
-      this.key === 'collapsed' ||
+      // this.key === 'collapsed' ||
       this.key === 'parentId' ||
       this.key === 'depth' ||
       this.key === 'index'

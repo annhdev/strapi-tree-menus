@@ -295,7 +295,7 @@ const GenericInput = ({
         return (
           <NumberInput
             disabled={disabled}
-            onValueChange={(value: Number) => {
+            onValueChange={(value: number) => {
               onChange({ target: { name, value, type } })
             }}
             placeholder={formattedPlaceholder}
