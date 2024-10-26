@@ -1,7 +1,6 @@
-import React, {forwardRef, CSSProperties} from 'react';
-import classNames from 'classnames';
-
-import styled from "styled-components";
+import classNames from 'classnames'
+import React, { CSSProperties, forwardRef } from 'react'
+import styled from 'styled-components'
 
 const ActionButton = styled.button`
   display: flex;
@@ -37,7 +36,9 @@ const ActionButton = styled.button`
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0), 0 0px 0px 2px #4c9ffe;
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0),
+      0 0px 0px 2px #4c9ffe;
   }
 
   @media (hover: hover) {
@@ -49,33 +50,31 @@ const ActionButton = styled.button`
       }
     }
   }
-`;
+`
 
 export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   active?: {
-    fill: string;
-    background: string;
-  };
-  cursor?: CSSProperties['cursor'];
+    fill: string
+    background: string
+  }
+  cursor?: CSSProperties['cursor']
 }
 
-export const Action = forwardRef<HTMLButtonElement, Props>(
-  ({active, className, cursor, style, ...props}, ref) => {
-    return (
-      <ActionButton
-        ref={ref}
-        {...props}
-        className={classNames('Action', className)}
-        tabIndex={0}
-        style={
-          {
-            ...style,
-            cursor,
-            '--fill': active?.fill,
-            '--background': active?.background,
-          } as CSSProperties
-        }
-      />
-    );
-  }
-);
+export const Action = forwardRef<HTMLButtonElement, Props>(({ active, className, cursor, style, ...props }, ref) => {
+  return (
+    <ActionButton
+      ref={ref}
+      {...props}
+      className={classNames('Action', className)}
+      tabIndex={0}
+      style={
+        {
+          ...style,
+          cursor,
+          '--fill': active?.fill,
+          '--background': active?.background,
+        } as CSSProperties
+      }
+    />
+  )
+})

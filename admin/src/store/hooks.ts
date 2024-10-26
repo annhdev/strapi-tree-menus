@@ -1,12 +1,12 @@
-import { useDispatch, useSelector,TypedUseSelectorHook} from 'react-redux';
-import type { Store } from '@strapi/strapi/admin';
+import type { Store } from '@strapi/strapi/admin'
+import { TypedUseSelectorHook,useDispatch, useSelector } from 'react-redux'
 
 type RootState = ReturnType<Store['getState']> & {
-  ['content-manager']: any;
-  ['tree-menus-config']: any;
-};
+  ['content-manager']: any
+  ['tree-menus-config']: any
+}
 
-const useTypedDispatch = useDispatch;
-const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+const useTypedDispatch = useDispatch
+const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export {useTypedSelector, useTypedDispatch};
+export { useTypedSelector, useTypedDispatch }

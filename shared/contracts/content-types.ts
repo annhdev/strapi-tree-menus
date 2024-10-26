@@ -1,51 +1,51 @@
-import type { Struct } from '@strapi/types';
-import { errors } from '@strapi/utils';
-import { ComponentConfiguration } from './components';
+import type { Struct } from '@strapi/types'
+import { errors } from '@strapi/utils'
+import { ComponentConfiguration } from './components'
 
 export type Settings = {
-  bulkable: boolean;
-  filterable: boolean;
-  searchable: boolean;
-  pageSize: number;
-  mainField: string;
-  defaultSortBy: string;
-  defaultSortOrder: string;
-};
+  bulkable: boolean
+  filterable: boolean
+  searchable: boolean
+  pageSize: number
+  mainField: string
+  defaultSortBy: string
+  defaultSortOrder: string
+}
 
 export type Metadatas = {
   [key: string]: {
     edit: {
-      label?: string;
-      description?: string;
-      placeholder?: string;
-      visible?: boolean;
-      editable?: boolean;
-    };
+      label?: string
+      description?: string
+      placeholder?: string
+      visible?: boolean
+      editable?: boolean
+    }
     list: {
-      label?: string;
-      mainField?: string;
-      searchable?: boolean;
-      sortable?: boolean;
-    };
-  };
-};
+      label?: string
+      mainField?: string
+      searchable?: boolean
+      sortable?: boolean
+    }
+  }
+}
 
 export type Layouts = {
-  list: string[];
-  edit: { name: string; size: number }[][];
-};
+  list: string[]
+  edit: { name: string; size: number }[][]
+}
 
 export type Configuration = {
-  uid?: string;
-  settings: Settings;
-  metadatas: Metadatas;
-  layouts: Layouts;
-  options?: object;
-};
+  uid?: string
+  settings: Settings
+  metadatas: Metadatas
+  layouts: Layouts
+  options?: object
+}
 
 export interface ContentType extends Struct.ContentTypeSchema {
-  isDisplayed: boolean;
-  apiID: string;
+  isDisplayed: boolean
+  apiID: string
 }
 
 /**
@@ -53,12 +53,12 @@ export interface ContentType extends Struct.ContentTypeSchema {
  */
 export declare namespace FindContentTypes {
   export interface Request {
-    body: {};
-    query: {};
+    body: {}
+    query: {}
   }
   export interface Response {
-    data: ContentType[];
-    error?: errors.ApplicationError | errors.YupValidationError;
+    data: ContentType[]
+    error?: errors.ApplicationError | errors.YupValidationError
   }
 }
 
@@ -67,15 +67,15 @@ export declare namespace FindContentTypes {
  */
 export declare namespace FindContentTypesSettings {
   export interface Request {
-    body: {};
-    query: {};
+    body: {}
+    query: {}
   }
   export interface Response {
     data: Array<{
-      uid: string;
-      settings: Settings;
-    }>;
-    error?: errors.ApplicationError;
+      uid: string
+      settings: Settings
+    }>
+    error?: errors.ApplicationError
   }
 }
 
@@ -84,15 +84,15 @@ export declare namespace FindContentTypesSettings {
  */
 export declare namespace FindContentTypeConfiguration {
   export interface Request {
-    body: {};
-    query: {};
+    body: {}
+    query: {}
   }
   export interface Response {
     data: {
-      contentType: Configuration;
-      components: Record<string, ComponentConfiguration>;
-    };
-    error?: errors.ApplicationError;
+      contentType: Configuration
+      components: Record<string, ComponentConfiguration>
+    }
+    error?: errors.ApplicationError
   }
 }
 
@@ -102,17 +102,17 @@ export declare namespace FindContentTypeConfiguration {
 export declare namespace UpdateContentTypeConfiguration {
   export interface Request {
     body: {
-      layouts: Layouts;
-      metadatas: Metadatas;
-      settings: Settings;
-    };
-    query: {};
+      layouts: Layouts
+      metadatas: Metadatas
+      settings: Settings
+    }
+    query: {}
   }
   export interface Response {
     data: {
-      contentType: Configuration;
-      components: Record<string, ComponentConfiguration>;
-    };
-    error?: errors.ApplicationError | errors.YupValidationError;
+      contentType: Configuration
+      components: Record<string, ComponentConfiguration>
+    }
+    error?: errors.ApplicationError | errors.YupValidationError
   }
 }

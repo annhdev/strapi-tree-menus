@@ -1,6 +1,7 @@
-import {useContext} from "react";
-import {MenuDataContext} from "../components/MenuDataProvider";
+import { useContext } from 'react'
 
-const useTreeData = ()=>useContext(MenuDataContext);
+import { MenuDataContext } from '../components/MenuDataProvider'
 
-export default useTreeData;
+const useTreeData = () => useContext(MenuDataContext)
+
+export default useTreeData

@@ -1,16 +1,16 @@
-import type { Struct } from '@strapi/types';
-import type { Configuration, Settings, Metadatas, Layouts } from './content-types';
-import { errors } from '@strapi/utils';
+import type { Struct } from '@strapi/types'
+import type { Configuration, Settings, Metadatas, Layouts } from './content-types'
+import { errors } from '@strapi/utils'
 
 export interface Component extends Struct.ComponentSchema {
-  isDisplayed: boolean;
-  info: Struct.SchemaInfo;
-  apiID: string;
+  isDisplayed: boolean
+  info: Struct.SchemaInfo
+  apiID: string
 }
 
 export interface ComponentConfiguration extends Configuration {
-  category: string;
-  isComponent: boolean;
+  category: string
+  isComponent: boolean
 }
 
 /**
@@ -18,12 +18,12 @@ export interface ComponentConfiguration extends Configuration {
  */
 export declare namespace FindComponents {
   export interface Request {
-    body: {};
-    query: {};
+    body: {}
+    query: {}
   }
   export interface Response {
-    data: Component[];
-    error?: errors.ApplicationError;
+    data: Component[]
+    error?: errors.ApplicationError
   }
 }
 
@@ -32,19 +32,19 @@ export declare namespace FindComponents {
  */
 export declare namespace FindComponentConfiguration {
   export interface Request {
-    body: {};
-    query: {};
+    body: {}
+    query: {}
   }
 
   export interface Params {
-    uid: string;
+    uid: string
   }
   export interface Response {
     data: {
-      component: ComponentConfiguration;
-      components: Record<string, ComponentConfiguration>;
-    };
-    error?: errors.ApplicationError;
+      component: ComponentConfiguration
+      components: Record<string, ComponentConfiguration>
+    }
+    error?: errors.ApplicationError
   }
 }
 
@@ -54,19 +54,19 @@ export declare namespace FindComponentConfiguration {
 export declare namespace UpdateComponentConfiguration {
   export interface Request {
     body: {
-      layouts: Layouts;
-      metadatas: Metadatas;
-      settings: Settings;
-    };
-    query: {};
+      layouts: Layouts
+      metadatas: Metadatas
+      settings: Settings
+    }
+    query: {}
   }
 
   export interface Params {
-    uid: string;
+    uid: string
   }
 
   export interface Response {
-    data: ComponentConfiguration;
-    error?: errors.ApplicationError | errors.YupValidationError;
+    data: ComponentConfiguration
+    error?: errors.ApplicationError | errors.YupValidationError
   }
 }

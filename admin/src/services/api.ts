@@ -1,5 +1,13 @@
-import { adminApi } from '@strapi/strapi/admin';
-import { BulkDeleteMenu, CreateMenu, DeleteMenu, GetAllMenu, GetMenu, UpdateMenu } from '../../../shared/contracts/menus';
+import { adminApi } from '@strapi/strapi/admin'
+
+import {
+  BulkDeleteMenu,
+  CreateMenu,
+  DeleteMenu,
+  GetAllMenu,
+  GetMenu,
+  UpdateMenu,
+} from '../../../shared/contracts/menus'
 
 const api = adminApi
   .enhanceEndpoints({
@@ -8,7 +16,10 @@ const api = adminApi
   .injectEndpoints({
     endpoints: (builder) => {
       return {
-        getAllMenus: builder.query<GetAllMenu.Response, GetAllMenu.Params & { params?: GetAllMenu.Request['query'] } & { [key: string]: any; }>({
+        getAllMenus: builder.query<
+          GetAllMenu.Response,
+          GetAllMenu.Params & { params?: GetAllMenu.Request['query'] } & { [key: string]: any }
+        >({
           query: ({ params }) => ({
             url: '/tree-menus/menu',
             method: 'GET',
@@ -18,7 +29,10 @@ const api = adminApi
           }),
           providesTags: ['TreeMenu'],
         }),
-        getMenu: builder.query<GetMenu.Response, GetMenu.Params & { params?: GetMenu.Request['query'] } & { [key: string]: any; }>({
+        getMenu: builder.query<
+          GetMenu.Response,
+          GetMenu.Params & { params?: GetMenu.Request['query'] } & { [key: string]: any }
+        >({
           query: ({ id, params }) => ({
             url: `/menu/${id}`,
             method: 'GET',
@@ -59,9 +73,9 @@ const api = adminApi
           }),
           invalidatesTags: ['TreeMenu'],
         }),
-      };
+      }
     },
-  });
+  })
 
 export const {
   useGetMenuQuery,
@@ -69,4 +83,4 @@ export const {
   useCreateTreeMenuMutation,
   useUpdateTreeMenuMutation,
   useDeleteTreeMenuMutation,
-} = api;
+} = api

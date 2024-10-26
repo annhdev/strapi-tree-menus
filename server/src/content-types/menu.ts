@@ -1,4 +1,4 @@
-import { fieldSchema } from '../../../shared/constants';
+import { fieldSchema } from '../../../shared/constants'
 
 export default {
   kind: 'collectionType',
@@ -55,10 +55,10 @@ export default {
       },
       type: 'customField',
       options: {
-        schemas: JSON.stringify(fieldSchema,null, 2),
+        schemas: JSON.stringify(fieldSchema, null, 2),
       },
       required: true,
       customField: 'plugin::tree-menus.tree',
     },
   },
-};
+}

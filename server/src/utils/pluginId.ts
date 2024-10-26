@@ -1,1 +1,1 @@
-export const pluginId = 'tree-menus';
+export const pluginId = 'tree-menus'

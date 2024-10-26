@@ -1,7 +1,7 @@
-import type { MessageDescriptor, PrimitiveType } from 'react-intl';
+import type { MessageDescriptor, PrimitiveType } from 'react-intl'
 
 interface TranslationMessage extends MessageDescriptor {
-  values?: Record<string, PrimitiveType>;
+  values?: Record<string, PrimitiveType>
 }
 
 export interface FieldSchema {
@@ -15,7 +15,7 @@ interface Attribute {
   type: string
   validationType: string
   value: any
-  validations: Validation[],
+  validations: Validation[]
   required?: boolean
   options?: Option[]
 }

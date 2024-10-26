@@ -1,12 +1,12 @@
-import {getTranslation} from './utils/getTranslation';
-import {PLUGIN_ID} from './pluginId';
-import {Initializer} from './components/Initializer';
-import {TreeIcon} from "./components/TreeIcon";
-import { PluginIcon } from './components/PluginIcon';
-import { reducers } from './store/reducers';
-import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
-import { fieldSchema } from '../../shared/constants';
-import { PERMISSIONS } from './permissions';
+import { fieldSchema } from '../../shared/constants'
+import { Initializer } from './components/Initializer'
+import { PluginIcon } from './components/PluginIcon'
+import { TreeIcon } from './components/TreeIcon'
+import { PERMISSIONS } from './permissions'
+import { PLUGIN_ID } from './pluginId'
+import { reducers } from './store/reducers'
+import { getTranslation } from './utils/getTranslation'
+import { prefixPluginTranslations } from './utils/prefixPluginTranslations'
 
 export default {
   register(app: any) {
@@ -18,14 +18,14 @@ export default {
         defaultMessage: PLUGIN_ID,
       },
       Component: async () => {
-        const { App } = await import('./pages/App');
+        const { App } = await import('./pages/App')
 
-        return App;
+        return App
       },
       permissions: PERMISSIONS.main,
-    });
+    })
 
-    app.addReducers(reducers);
+    app.addReducers(reducers)
 
     app.customFields.register({
       name: 'tree',
@@ -55,7 +55,7 @@ export default {
             },
             name: 'options.schemas',
             type: 'json',
-            defaultValue: JSON.stringify(fieldSchema,null, 2),
+            defaultValue: JSON.stringify(fieldSchema, null, 2),
             description: {
               id: getTranslation('tree-menus.options.advanced.fields.description'),
               defaultMessage: 'Schema of the tree',
@@ -88,36 +88,35 @@ export default {
         //     title: yup.string().required('Title is required'),
         //   }
         // }
-
       },
-    });
+    })
 
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
       isReady: false,
       name: PLUGIN_ID,
-    });
+    })
   },
 
   async registerTrads(app: any) {
-    const {locales} = app;
+    const { locales } = app
 
     return await Promise.all(
       (locales as string[]).map(async (locale: string) => {
         try {
-          const {default: data} = await import(`./translations/${locale}.json`);
+          const { default: data } = await import(`./translations/${locale}.json`)
           return {
             data: prefixPluginTranslations(data, PLUGIN_ID),
             locale,
-          };
+          }
         } catch {
           return {
             data: {},
             locale,
-          };
+          }
         }
       })
-    );
+    )
   },
-};
+}

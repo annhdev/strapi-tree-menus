@@ -1,24 +1,25 @@
 // import type { ComponentsDictionary, Schema } from '../hooks/useDocument';
-import type { Schema as SchemaUtils } from '@strapi/types';
-import { Component } from '../../../shared/contracts/components';
-import { ContentType } from '../../../shared/contracts/content-types';
+import type { Schema as SchemaUtils } from '@strapi/types'
 
-type ComponentsDictionary = Record<string, Component>;
-type Schema = ContentType;
+import { Component } from '../../../shared/contracts/components'
+import { ContentType } from '../../../shared/contracts/content-types'
+
+type ComponentsDictionary = Record<string, Component>
+type Schema = ContentType
 
 const checkIfAttributeIsDisplayable = (attribute: SchemaUtils.Attribute.AnyAttribute) => {
-  const { type } = attribute;
+  const { type } = attribute
 
   if (type === 'relation') {
-    return !attribute.relation.toLowerCase().includes('morph');
+    return !attribute.relation.toLowerCase().includes('morph')
   }
 
-  return !['json', 'dynamiczone', 'richtext', 'password', 'blocks'].includes(type) && !!type;
-};
+  return !['json', 'dynamiczone', 'richtext', 'password', 'blocks'].includes(type) && !!type
+}
 
 interface MainField {
-  name: string;
-  type: SchemaUtils.Attribute.Kind | 'custom';
+  name: string
+  type: SchemaUtils.Attribute.Kind | 'custom'
 }
 
 /**
@@ -33,21 +34,20 @@ const getMainField = (
   { schemas, components }: { schemas: Schema[]; components: ComponentsDictionary }
 ): MainField | undefined => {
   if (!mainFieldName) {
-    return undefined;
+    return undefined
   }
 
   const mainFieldType =
     attribute.type === 'component'
       ? components[attribute.component].attributes[mainFieldName].type
       : // @ts-expect-error – `targetModel` does exist on the attribute for a relation.
-        schemas.find((schema) => schema.uid === attribute.targetModel)?.attributes[mainFieldName]
-          .type;
+        schemas.find((schema) => schema.uid === attribute.targetModel)?.attributes[mainFieldName].type
 
   return {
     name: mainFieldName,
     type: mainFieldType ?? 'string',
-  };
-};
+  }
+}
 
-export { checkIfAttributeIsDisplayable, getMainField };
-export type { MainField };
+export { checkIfAttributeIsDisplayable, getMainField }
+export type { MainField }

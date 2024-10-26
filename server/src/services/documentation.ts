@@ -1,36 +1,36 @@
-import { Core, UID } from '@strapi/strapi';
-import { UID_MENU, UID_UPLOAD_FILE } from '../../../shared/constants';
-import params from '../utils/query-params';
+import { Core, UID } from '@strapi/strapi'
+import { UID_MENU, UID_UPLOAD_FILE } from '../../../shared/constants'
+import params from '../utils/query-params'
 
-const SPEC_NESTING_LIMIT = 3;
-const SPEC_RELATION_NESTING_LIMIT = 1;
+const SPEC_NESTING_LIMIT = 3
+const SPEC_RELATION_NESTING_LIMIT = 1
 
 const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
   getAttributesSpec(uid: UID.Schema, level = 1): Record<string, any> {
-    const model = strapi.getModel(uid);
+    const model = strapi.getModel(uid)
 
     if (!model) {
-      return {};
+      return {}
     }
 
     return Object.entries(model.attributes).reduce((acc, [key, value]: [string, any]) => {
-      let type = 'string';
-      let extraProps: any = {};
+      let type = 'string'
+      let extraProps: any = {}
 
       if (value.type === 'boolean') {
-        type = 'boolean';
+        type = 'boolean'
       }
 
       if (value.type === 'datetime') {
-        extraProps.format = 'date-time';
+        extraProps.format = 'date-time'
       }
 
       if (value.type === 'json') {
-        type = 'object';
+        type = 'object'
       }
 
       if (value.type === 'customField' && value.customField === 'plugin::tree-menus.tree') {
-        type = 'array';
+        type = 'array'
         extraProps.items = {
           type: 'object',
           properties: {
@@ -54,32 +54,24 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
               items: this.getTreeItemAttributesSpec(level + 1),
             },
           },
-        };
+        }
       }
 
       if (['biginteger', 'decimal', 'float', 'integer'].includes(value.type)) {
-        type = 'number';
+        type = 'number'
       }
 
       if (value.type === 'media') {
-        type = 'object';
-        extraProps.properties = this.getRelationAttributesSpec(
-          UID_UPLOAD_FILE,
-          level,
-          value.multiple,
-        );
+        type = 'object'
+        extraProps.properties = this.getRelationAttributesSpec(UID_UPLOAD_FILE, level, value.multiple)
       }
 
       if (value.type === 'relation') {
         if (value.target !== 'admin::user') {
-          type = 'object';
-          extraProps.properties = this.getRelationAttributesSpec(
-            value.target,
-            level,
-            value.relation.includes('Many'),
-          );
+          type = 'object'
+          extraProps.properties = this.getRelationAttributesSpec(value.target, level, value.relation.includes('Many'))
         } else {
-          type = 'string';
+          type = 'string'
         }
       }
 
@@ -89,8 +81,8 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           ...extraProps,
           type,
         },
-      };
-    }, {});
+      }
+    }, {})
   },
   getRelationAttributesSpec(uid: UID.Schema, level = 1, multiple = false) {
     const relationSpec = {
@@ -104,24 +96,24 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           properties: level < SPEC_RELATION_NESTING_LIMIT ? this.getAttributesSpec(uid, level + 1) : {},
         },
       },
-    };
+    }
 
     return {
       data: multiple
         ? {
-          type: 'array',
-          items: relationSpec,
-        }
+            type: 'array',
+            items: relationSpec,
+          }
         : relationSpec,
-    };
+    }
   },
   getRequiredAttributes(uid: UID.Schema) {
-    const model = strapi.getModel(uid);
-    const attrs = model.attributes;
+    const model = strapi.getModel(uid)
+    const attrs = model.attributes
 
-    return Object.keys(attrs).filter((attr) => attrs[attr].required);
+    return Object.keys(attrs).filter((attr) => attrs[attr].required)
   },
-  getTreeItemAttributesSpec(level = 1):any {
+  getTreeItemAttributesSpec(level = 1): any {
     return {
       type: 'object',
       properties: {
@@ -145,13 +137,13 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           items: level < SPEC_NESTING_LIMIT ? this.getTreeItemAttributesSpec(level + 1) : { type: 'object' },
         },
       },
-    };
+    }
   },
 
   overrides() {
-    const menuSchema = this.getAttributesSpec(UID_MENU);
+    const menuSchema = this.getAttributesSpec(UID_MENU)
 
-    const menuRequiredAttrs = this.getRequiredAttributes(UID_MENU);
+    const menuRequiredAttrs = this.getRequiredAttributes(UID_MENU)
 
     const errorSchemas = {
       '400': {
@@ -204,7 +196,7 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           },
         },
       },
-    };
+    }
 
     return {
       tags: [{ name: 'Menus', description: 'Operations about menus' }],
@@ -212,17 +204,15 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
         schemas: {
           Menu: {
             type: 'object',
-            properties:
-              {
-                id: {
-                  type: 'number',
-                },
-                documentId: {
-                  type: 'string',
-                },
-                ...menuSchema,
-
+            properties: {
+              id: {
+                type: 'number',
               },
+              documentId: {
+                type: 'string',
+              },
+              ...menuSchema,
+            },
             required: menuRequiredAttrs,
           },
           Meta: {
@@ -387,14 +377,16 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
         '/tree-menus/menu/{id}': {
           get: {
             tags: ['Menus'],
-            parameters: [{
-              name: `id`,
-              in: 'path',
-              description: '',
-              deprecated: false,
-              required: true,
-              schema: { type: 'string' },
-            }],
+            parameters: [
+              {
+                name: `id`,
+                in: 'path',
+                description: '',
+                deprecated: false,
+                required: true,
+                schema: { type: 'string' },
+              },
+            ],
             summary: 'Retrieve one menu',
             operationId: 'findOneMenu',
             responses: {
@@ -413,14 +405,16 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           },
           put: {
             tags: ['Menus'],
-            parameters: [{
-              name: `id`,
-              in: 'path',
-              description: '',
-              deprecated: false,
-              required: true,
-              schema: { type: 'string' },
-            }],
+            parameters: [
+              {
+                name: `id`,
+                in: 'path',
+                description: '',
+                deprecated: false,
+                required: true,
+                schema: { type: 'string' },
+              },
+            ],
             summary: 'Update one menu',
             operationId: 'updateOneMenu',
             requestBody: {
@@ -449,14 +443,16 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           },
           delete: {
             tags: ['Menus'],
-            parameters: [{
-              name: `id`,
-              in: 'path',
-              description: '',
-              deprecated: false,
-              required: true,
-              schema: { type: 'string' },
-            }],
+            parameters: [
+              {
+                name: `id`,
+                in: 'path',
+                description: '',
+                deprecated: false,
+                required: true,
+                schema: { type: 'string' },
+              },
+            ],
             summary: 'Delete one menu',
             operationId: 'deleteOneMenu',
             requestBody: {},
@@ -507,9 +503,9 @@ const documentation = ({ strapi }: { strapi: Core.Strapi }) => ({
           },
         },
       },
-    };
+    }
   },
-});
+})
 
-export type DocumentationService = ReturnType<typeof documentation>;
-export default documentation;
+export type DocumentationService = ReturnType<typeof documentation>
+export default documentation

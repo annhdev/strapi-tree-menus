@@ -1,6 +1,6 @@
 {
   "name": "tree-menus",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Menu manage and custom tree field",
   "keywords": [],
   "homepage": "https://github.com/annhdev/strapi-tree-menus#readme",
@@ -40,7 +40,11 @@
     "test:ts:front": "run -T tsc -p admin/tsconfig.json",
     "verify": "strapi-plugin verify",
     "watch": "strapi-plugin watch",
-    "watch:link": "strapi-plugin watch:link"
+    "watch:link": "strapi-plugin watch:link",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

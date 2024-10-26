@@ -59,4 +59,4 @@ export default [
       policies: ['admin::isAuthenticatedAdmin'],
     },
   },
-];
+]

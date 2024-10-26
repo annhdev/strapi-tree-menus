@@ -1,4 +1,4 @@
-import type { OpenAPIV3 } from 'openapi-types';
+import type { OpenAPIV3 } from 'openapi-types'
 
 const params: OpenAPIV3.ParameterObject[] = [
   {
@@ -103,6 +103,6 @@ const params: OpenAPIV3.ParameterObject[] = [
       type: 'string',
     },
   },
-];
+]
 
-export default params;
+export default params

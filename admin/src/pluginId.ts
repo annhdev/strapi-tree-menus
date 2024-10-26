@@ -1,1 +1,1 @@
-export const PLUGIN_ID = 'tree-menus';
+export const PLUGIN_ID = 'tree-menus'

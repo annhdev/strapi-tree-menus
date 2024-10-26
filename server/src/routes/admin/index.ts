@@ -1,8 +1,6 @@
-import menu from './menu';
+import menu from './menu'
 
 export default {
   type: 'admin',
-  routes: [
-    ...menu
-  ],
-};
+  routes: [...menu],
+}
